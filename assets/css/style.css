@@ -8,7 +8,7 @@
 .shop-page h2 {
     font-size: 32px;
     margin-bottom: 30px;
-    color: #ff4f91;
+    color: #e787aa;
 }
 
 /* Product Grid Layout */
@@ -55,14 +55,14 @@
 .product-card .price {
     font-size: 16px;
     margin: 8px 0;
-    color: #ff4f91;
+    color: #e787aa;
     font-weight: bold;
 }
 
 /* View Button */
 .product-card .btn-sm {
     display: inline-block;
-    background: #ff4f91;
+    background: #e787aa;
     color: white;
     padding: 8px 15px;
     font-size: 14px;
@@ -72,5 +72,106 @@
 }
 
 .product-card .btn-sm:hover {
+    background: #e787aa;
+}
+
+/* --- PRODUCT DETAIL PAGE --- */
+
+.product-detail {
+    width: 90%;
+    margin: 40px auto;
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+/* Product Image */
+.detail-img {
+    width: 380px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Detail Info Section */
+.detail-info {
+    max-width: 450px;
+}
+
+.detail-info h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.detail-info .price {
+    font-size: 22px;
+    color: #ff4f91;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.description {
+      margin:0 0 18px 0;
+      line-height:1.6;
+      color:#2d2d33;
+ }
+
+.features {
+      margin:0 0 18px 0;
+}
+
+.features ul {
+      padding-left:18px;
+      margin:8px 0;
+}
+
+/* Size Dropdown */
+.detail-info label {
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.detail-info select {
+    width: 150px;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+/* Add to Cart Button */
+.detail-info .btn {
+    background: #ff4f91;
+    color: white;
+    padding: 10px 25px;
+    font-size: 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.detail-info .btn:hover {
     background: #ff2f78;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .product-detail {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .detail-img {
+        width: 100%;
+        height: auto;
+    }
+
+    .detail-info {
+        width: 100%;
+    }
 }
