@@ -1,1 +1,1 @@
-# Database connection file
+# Site-wide constants (site name, URLs)
