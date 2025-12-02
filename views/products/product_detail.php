@@ -1,34 +1,57 @@
-<?php include "../../views/include/header.php"; ?>
+<?php
+// Include header (path relative to this file: views/products)
+include __DIR__ . "/../include/header.php";
 
-<link rel="stylesheet" href="../../assets/css/style.css">
+// Get product id from query string
+$product_id = isset($_GET['id']) ? (int) $_GET['id'] : 1;
 
+
+$product = null;
+
+// Try DB first (if configured). This allows using MySQL data instead of the hardcoded array.
+$dbFile = __DIR__ . '/../../config/db.php';
+$modelFile = __DIR__ . '/../../models/Product.php';
+if (file_exists($dbFile) && file_exists($modelFile)) {
+    require_once $dbFile;
+    require_once $modelFile;
+    $product = Product::find($product_id);
+}
+
+// Fallback to hardcoded products array
+if (!$product) {
+    $product = isset($products[$product_id]) ? $products[$product_id] : null;
+}
+
+if (!$product) {
+    echo '<div class="product-detail"><p>Product not found.</p></div>';
+    include __DIR__ . "/../include/footer.php";
+    exit;
+}
+?>
+
+<?php
+// Build URL-safe image path: keep directories, urlencode only the filename
+$rawImage = isset($product['image']) ? str_replace('\\', '/', $product['image']) : '';
+$imageUrl = '';
+if ($rawImage !== '') {
+    $parts = explode('/', $rawImage);
+    $filename = array_pop($parts);
+    $dir = implode('/', $parts);
+    $imageUrl = '../../assets/images/products/' . ($dir ? $dir . '/' : '') . rawurlencode($filename);
+}
+?>
 <div class="product-detail">
-    <img src="../../assets\images\products\co-ords\Black Scalloped Embroidered Co-Ord Set (2-Piece).jpg" class="detail-img">
+    <img src="<?= $imageUrl ?: '../../assets/images/products/placeholder.jpg' ?>" alt="<?= htmlspecialchars($product['name']) ?>" class="detail-img">
+
 
     <div class="detail-info">
-        <h2>Black Scalloped Embroidered Co-Ord Set (2-Piece)</h2>
-        <p class="price">Rs 5000</p>
-        <p class="description">
-            Elevate your everyday style with Clothify’s <strong>Black Scalloped Embroidered Co-Ord Set</strong>, designed for girls who love minimal elegance.
-            This two-piece outfit features a loose-fit kurta with delicate white scalloped embroidery on the sleeves and hem, paired with matching wide-leg trousers that offer comfort and sophistication.
-        </p>
-
-        <p class="description">
-            Crafted from soft, breathable fabric, this outfit is perfect for casual outings, university wear, brunch, or summer gatherings.
-            The clean silhouette and classic black shade make it a wardrobe essential you can style effortlessly.
-        </p>
-        <section class="features" aria-labelledby="features-heading">
-            <h3 id="features-heading">Features</h3>
-                <ul>
-                    <li>2-Piece Set: Kurta + Wide-Leg Trousers</li>
-                    <li>Premium soft &amp; breathable fabric</li>
-                    <li>White scalloped embroidery detailing</li>
-                    <li>Loose, comfortable fit</li>
-                    <li>Stylish, minimal, and elegant look</li>
-                    <li>Perfect for everyday wear</li>
-                </ul>
-        </section>
-
+        <h2><?= htmlspecialchars($product['name']) ?></h2>
+        <p class="price"><?= htmlspecialchars($product['price']) ?></p>
+        <?php if (!empty($product['category'])): ?>
+            <p class="category">Category: <?= htmlspecialchars(ucwords(str_replace(['-','_'], ' ', $product['category']))) ?></p>
+        <?php endif; ?>
+        <p class="description"><?= nl2br(htmlspecialchars($product['description'])) ?></p>
+        
         <label>Size:</label>
         <select>
             <option>Small</option>
@@ -36,8 +59,8 @@
             <option>Large</option>
         </select>
 
-        <a href="cart.php" class="btn">Add to Cart</a>
+        <a href="../../cart.php" class="btn">Add to Cart</a>
     </div>
 </div>
 
-<?php include "views/include/footer.php"; ?>
+<?php include __DIR__ . "/../include/footer.php"; ?>
