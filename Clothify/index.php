@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Clothify - Women Clothing Brand</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
@@ -14,14 +14,14 @@
     <!-- TOP-RIGHT ICONS -->
 <div class="top-icons">
     <!-- Login Icon -->
-    <a href="#" class="icon login" title="Login">
+    <a href="views/auth/login.php" class="icon login" title="Login">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" viewBox="0 0 16 16">
             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
         </svg>
     </a>
 
     <!-- Feather Style Cart Icon -->
-    <a href="#" class="icon cart" title="Cart">
+    <a href="views/cart/view_cart.php" class="icon cart" title="Cart">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
             <circle cx="10" cy="20" r="2"/>
             <circle cx="18" cy="20" r="2"/>
@@ -35,10 +35,10 @@
     <!-- HERO SECTION -->
 <section class="hero-section">
   <div class="hero-slider">
-    <img src="1.jpg" class="hero-slide" alt="Slide 1">
-    <img src="7.jpg" class="hero-slide" alt="Slide 2">
-    <img src="8.jpg" class="hero-slide" alt="Slide 3">
-    <img src="1.jpg" class="hero-slide" alt="Slide 1 Duplicate">
+    <img src="assets/images/banners/1.jpg" class="hero-slide" alt="Slide 1">
+    <img src="assets/images/banners/7.jpg" class="hero-slide" alt="Slide 2">
+    <img src="assets/images/banners/8.jpg" class="hero-slide" alt="Slide 3">
+    <img src="assets/images/banners/1.jpg" class="hero-slide" alt="Slide 1 Duplicate">
   </div>
 
   <!-- Center Text (only one block!) -->
@@ -53,21 +53,21 @@
     <section class="circular-images">
         <div class="circle-item">
             <div class="circle">
-                <img src="2.webp" alt="Casuals">
+                <img src="assets/images/banners/2.webp" alt="Casuals">
             </div>
             <div class="circle-text">Casuals</div>
         </div>
 
         <div class="circle-item">
             <div class="circle">
-                <img src="6.jpg" alt="Party Wear">
+                <img src="assets/images/banners/6.jpg" alt="Party Wear">
             </div>
             <div class="circle-text">Party Wear</div>
         </div>
 
         <div class="circle-item">
             <div class="circle">
-                <img src="5.jpg" alt="Wedding">
+                <img src="assets/images/banners/5.jpg" alt="Wedding">
             </div>
             <div class="circle-text">Wedding</div>
         </div>
@@ -84,7 +84,7 @@
 
         <div class="video">
             <video autoplay loop muted>
-                <source src="video.mp4" type="video/mp4">
+                <source src="assets/images/banners/video.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -94,7 +94,7 @@
     <section class="featured-collection1">
           <div class="video">
             <video autoplay loop muted>
-                <source src="pw.mp4" type="video/mp4">
+                <source src="assets/images/banners/pw.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
           </div>
@@ -117,7 +117,7 @@
 
         <div class="video">
             <video autoplay loop muted>
-                <source src="partywear.mp4" type="video/mp4">
+                <source src="assets/images/banners/partywear.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -137,29 +137,29 @@
   <h2 class="trending-title">Your Fashion Palette</h2>
 
   <div class="trending-grid">
-    <div class="t-box big"><img src="28.jpg" alt="Trending"></div>
-    <div class="t-box"><img src="2.webp" alt="Trending"></div>
-    <div class="t-box"><img src="10.jpg" alt="Trending"></div>
-    <div class="t-box"><img src="11.jpg" alt="Trending"></div>
-    <div class="t-box big"><img src="12.jpg" alt="Trending"></div>
-    <div class="t-box"><img src="party wear.jpg" alt="Trending"></div>
-    <div class="t-box"><img src="14.jpg" alt="Trending"></div>
-    <div class="t-box big"><img src="15.jpg" alt="Trending"></div>
-    <div class="t-box"><img src="16.jpg" alt="Trending"></div>
-    <div class="t-box"><img src="17.jpg" alt="Trending"></div>
-    <div class="t-box"><img src="20.jpg" alt="Trending"></div>
-    <div class="t-box"><img src="21.jpg" alt="Trending"></div>
-    <div class="t-box"><img src="22.jpg" alt="Trending"></div>
-    <div class="t-box"><img src="wedding.jpg" alt="Trending"></div>
-    <div class="t-box"><img src="18.jpg" alt="Trending"></div>
-    <div class="t-box"><img src="23.jpg" alt="Trending"></div>
-    <div class="t-box"><img src="24.jpg" alt="Trending"></div>
-    <div class="t-box"><img src="13.jpg" alt="Trending"></div>
-    <div class="t-box"><img src="9.jpg" alt="Trending"></div>
-    <div class="t-box"><img src="4.jpg" alt="Trending"></div>
-    <div class="t-box"><img src="5.jpg" alt="Trending"></div>
-    <div class="t-box"><img src="6.jpg" alt="Trending"></div>
-    <div class="t-box"><img src="7.jpg" alt="Trending"></div>
+    <div class="t-box big"><img src="assets/images/banners/28.jpg" alt="Trending"></div>
+    <div class="t-box"><img src="assets/images/banners/2.webp" alt="Trending"></div>
+    <div class="t-box"><img src="assets/images/banners/10.jpg" alt="Trending"></div>
+    <div class="t-box"><img src="assets/images/banners/11.jpg" alt="Trending"></div>
+    <div class="t-box big"><img src="assets/images/banners/12.jpg" alt="Trending"></div>
+    <div class="t-box"><img src="assets/images/banners/party wear.jpg" alt="Trending"></div>
+    <div class="t-box"><img src="assets/images/banners/14.jpg" alt="Trending"></div>
+    <div class="t-box big"><img src="assets/images/banners/15.jpg" alt="Trending"></div>
+    <div class="t-box"><img src="assets/images/banners/16.jpg" alt="Trending"></div>
+    <div class="t-box"><img src="assets/images/banners/17.jpg" alt="Trending"></div>
+    <div class="t-box"><img src="assets/images/banners/20.jpg" alt="Trending"></div>
+    <div class="t-box"><img src="assets/images/banners/21.jpg" alt="Trending"></div>
+    <div class="t-box"><img src="assets/images/banners/22.jpg" alt="Trending"></div>
+    <div class="t-box"><img src="assets/images/banners/wedding.jpg" alt="Trending"></div>
+    <div class="t-box"><img src="assets/images/banners/18.jpg" alt="Trending"></div>
+    <div class="t-box"><img src="assets/images/banners/23.jpg" alt="Trending"></div>
+    <div class="t-box"><img src="assets/images/banners/24.jpg" alt="Trending"></div>
+    <div class="t-box"><img src="assets/images/banners/13.jpg" alt="Trending"></div>
+    <div class="t-box"><img src="assets/images/banners/9.jpg" alt="Trending"></div>
+    <div class="t-box"><img src="assets/images/banners/4.jpg" alt="Trending"></div>
+    <div class="t-box"><img src="assets/images/banners/5.jpg" alt="Trending"></div>
+    <div class="t-box"><img src="assets/images/banners/6.jpg" alt="Trending"></div>
+    <div class="t-box"><img src="assets/images/banners/7.jpg" alt="Trending"></div>
   </div>
 </section>
 
@@ -184,7 +184,7 @@
         <div class="footer-section">
             <h3>Quick Links</h3>
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
