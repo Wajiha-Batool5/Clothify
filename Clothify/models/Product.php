@@ -1,91 +1,42 @@
 <?php
-/**
- * Product model - simple DB accessor.
- * Expects `get_db_connection()` to be available from `config/db.php`.
- */
-class Product
-{
-    public static function find(int $id)
-    {
-        if ($id <= 0) {
-            return null;
-        }
+include __DIR__ . '/../config/db.php';
 
-        if (!function_exists('get_db_connection')) {
-            return null;
-        }
+class Product {
+    private $conn;
+    public function __construct($conn){
+        $this->conn = $conn;
+    }
 
-        $conn = get_db_connection();
-        if (!$conn) {
-            return null;
+    // Get all products
+    public function getAllProducts(){
+        $sql = "SELECT * FROM products";
+        $result = $this->conn->query($sql);
+        $products = [];
+        while($row = $result->fetch_assoc()){
+            $products[] = $row;
         }
+        return $products;
+    }
 
-        $stmt = $conn->prepare('SELECT id, name, price, image, description, category FROM products WHERE id = ? LIMIT 1');
-        if (!$stmt) {
-            return null;
-        }
-        $stmt->bind_param('i', $id);
+    // Get products by category
+    public function getProductsByCategory($category_id){
+        $stmt = $this->conn->prepare("SELECT * FROM products WHERE category_id=?");
+        $stmt->bind_param("i", $category_id);
         $stmt->execute();
         $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-        $stmt->close();
-
-        if (!$row) {
-            return null;
+        $products = [];
+        while($row = $result->fetch_assoc()){
+            $products[] = $row;
         }
-
-        // add default empty features and ensure category exists
-        $row['features'] = [];
-        if (!isset($row['category'])) $row['category'] = '';
-
-        return $row;
+        return $products;
     }
 
-    public static function all()
-    {
-        if (!function_exists('get_db_connection')) {
-            return null;
-        }
-        $conn = get_db_connection();
-        if (!$conn) {
-            return null;
-        }
-        $res = $conn->query('SELECT id, name, price, image, description, category FROM products ORDER BY id ASC');
-        if (!$res) return [];
-        $out = [];
-        while ($row = $res->fetch_assoc()) {
-            $row['features'] = []; // default empty features
-            if (!isset($row['category'])) $row['category'] = '';
-            $out[] = $row;
-        }
-        return $out;
-    }
-
-    public static function byCategory($category)
-    {
-        if (!function_exists('get_db_connection')) {
-            return null;
-        }
-        $conn = get_db_connection();
-        if (!$conn) {
-            return null;
-        }
-        
-        $stmt = $conn->prepare('SELECT id, name, price, image, description, category FROM products WHERE category = ? ORDER BY id ASC');
-        if (!$stmt) {
-            return [];
-        }
-        
-        $stmt->bind_param('s', $category);
+    // Get single product
+    public function getProductById($id){
+        $stmt = $this->conn->prepare("SELECT * FROM products WHERE id=?");
+        $stmt->bind_param("i", $id);
         $stmt->execute();
-        $res = $stmt->get_result();
-        $out = [];
-        while ($row = $res->fetch_assoc()) {
-            $row['features'] = [];
-            if (!isset($row['category'])) $row['category'] = '';
-            $out[] = $row;
-        }
-        $stmt->close();
-        return $out;
+        return $stmt->get_result()->fetch_assoc();
     }
 }
+?>

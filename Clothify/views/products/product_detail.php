@@ -1,66 +1,63 @@
 <?php
-// Include header (path relative to this file: views/products)
-include __DIR__ . "/../include/header.php";
+include __DIR__ . '/../../config/db.php';
+include __DIR__ . '/../../controllers/ProductController.php';
+session_start();
 
-// Get product id from query string
-$product_id = isset($_GET['id']) ? (int) $_GET['id'] : 1;
+$productController = new ProductController($conn);
 
+// Get product ID
+$product_id = $_GET['id'] ?? null;
+if(!$product_id) die("Product not specified.");
 
-$product = null;
-
-// Try DB first (if configured). This allows using MySQL data instead of the hardcoded array.
-$dbFile = __DIR__ . '/../../config/db.php';
-$modelFile = __DIR__ . '/../../models/Product.php';
-if (file_exists($dbFile) && file_exists($modelFile)) {
-    require_once $dbFile;
-    require_once $modelFile;
-    $product = Product::find($product_id);
-}
-
-// Fallback to hardcoded products array
-if (!$product) {
-    $product = isset($products[$product_id]) ? $products[$product_id] : null;
-}
-
-if (!$product) {
-    echo '<div class="product-detail"><p>Product not found.</p></div>';
-    include __DIR__ . "/../include/footer.php";
-    exit;
-}
+$product = $productController->getProductById($product_id);
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><?php echo htmlspecialchars($product['name']); ?> - Clothify</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+<h1><?php echo htmlspecialchars($product['name']); ?></h1>
+<img src="../../assets/images/products/<?php echo $product['image']; ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+<p>Price: Rs. <?php echo $product['price']; ?></p>
+<p><?php echo $product['description']; ?></p>
 
-<?php
-// Build URL-safe image path: keep directories, urlencode only the filename
-$rawImage = isset($product['image']) ? str_replace('\\', '/', $product['image']) : '';
-$imageUrl = '';
-if ($rawImage !== '') {
-    $parts = explode('/', $rawImage);
-    $filename = array_pop($parts);
-    $dir = implode('/', $parts);
-    $imageUrl = '../../assets/images/products/' . ($dir ? $dir . '/' : '') . rawurlencode($filename);
-}
-?>
-<div class="product-detail">
-    <img src="<?= $imageUrl ?: '../../assets/images/products/placeholder.jpg' ?>" alt="<?= htmlspecialchars($product['name']) ?>" class="detail-img">
+<label>Quantity:</label>
+<input type="number" id="quantity" value="1" min="1">
 
+<button id="addToCartBtn">Add to Cart</button>
+<p id="statusMsg" style="color:green;"></p>
 
-    <div class="detail-info">
-        <h2><?= htmlspecialchars($product['name']) ?></h2>
-        <p class="price"><?= htmlspecialchars($product['price']) ?></p>
-        <?php if (!empty($product['category'])): ?>
-            <p class="category">Category: <?= htmlspecialchars(ucwords(str_replace(['-','_'], ' ', $product['category']))) ?></p>
-        <?php endif; ?>
-        <p class="description"><?= nl2br(htmlspecialchars($product['description'])) ?></p>
-        
-        <label>Size:</label>
-        <select>
-            <option>Small</option>
-            <option>Medium</option>
-            <option>Large</option>
-        </select>
+<script>
+document.getElementById('addToCartBtn').addEventListener('click', function() {
+    const qty = parseInt(document.getElementById('quantity').value);
+    const formData = new FormData();
+    formData.append('product_id', <?php echo $product_id; ?>);
+    formData.append('quantity', qty);
 
-        <a href="../../cart.php" class="btn">Add to Cart</a>
-    </div>
-</div>
+    fetch('../../api/add_to_cart.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        const statusMsg = document.getElementById('statusMsg');
+        if(data.status){
+            statusMsg.innerText = "Added to cart successfully!";
+            // Optional: update cart dynamically if view_cart.php is open in iframe or separate section
+        } else {
+            statusMsg.innerText = data.message;
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert('Error adding to cart');
+    });
+});
+</script>
 
-<?php include __DIR__ . "/../include/footer.php"; ?>
+<a href="shop.php">Back to Shop</a>
+</body>
+</html>

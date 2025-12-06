@@ -361,7 +361,6 @@ html, body {
 }
 
 /* FOOTER SECTION */
-/* FOOTER SECTION */
 .footer {
     background-color: #778873;
     color: #fff;
@@ -601,7 +600,7 @@ button:hover {
     content: '';
     position: absolute;
     inset: 0;
-    background: url('floral.jpg') no-repeat center center;
+    background: url('Clothify/assets/images/background/floral.jpg') no-repeat center center;
     background-size: cover;
     opacity: 0.90;  /* Adjust opacity here (0.0 to 1.0) */
     z-index: 1;
@@ -731,3 +730,59 @@ button:hover {
     }
 }
 
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+.page-title {
+    text-align: center;
+    margin: 30px 0;
+    font-size: 32px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.product-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.btn {
+    background: black;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.about-section,
+.contact-section {
+    display: flex;
+    gap: 30px;
+}
+
+.about-img {
+    width: 300px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+}

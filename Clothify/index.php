@@ -123,7 +123,7 @@
         </div>
     </section>
 <!-- CLOTHIFY CENTER SECTION -->
-<section class="clothify-section">
+<section id="about" class="clothify-section">
     <div class="clothify-content">
     <h1>Clothify</h1>
     <h2>Your Style, Your Statement</h2>
@@ -171,7 +171,7 @@
     <div class="footer-container">
 
         <!-- Contact Info -->
-        <div class="footer-section">
+        <div id="contact" class="footer-section">
             <h3>Contact Us</h3>
             <p>
                 <strong>Location:</strong> 123 Fashion Street, Karachi, Pakistan<br>
@@ -185,8 +185,8 @@
             <h3>Quick Links</h3>
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
 
