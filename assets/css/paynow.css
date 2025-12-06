@@ -1,0 +1,168 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Background image with low opacity */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url("flower.jpg") no-repeat center/cover;
+    z-index: -1;
+}
+
+.paynow-wrapper {
+    width: 480px;
+    max-width: 95%;
+}
+
+.paynow-card {
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: #000;
+}
+
+h2, h3 {
+    margin: 0;
+    text-align: center;
+}
+
+/* Order summary */
+.order-summary {
+    background: rgba(255,255,255,0.35);
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 8px 0;
+}
+
+.order-item img {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.item-details {
+    flex: 1;
+}
+
+.order-total {
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Payment method */
+.payment-method {
+    background: rgba(255,255,255,0.35);
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.payment-method label {
+    color: #000;
+    font-weight: 500;
+}
+
+/* Card details */
+.card-details, .paypal-info {
+    background: rgba(255,255,255,0.35);
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    color: #000;
+}
+
+.form-inline {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap; /* optional: wrap on small screens */
+}
+
+.form-inline .form-group {
+    flex: 1; /* both fields share space */
+    min-width: 0; /* prevent overflow */
+}
+
+/* Specifically limit CVV width */
+.form-inline .form-group:last-child input {
+    max-width: 100px; /* CVV field max width */
+}
+
+
+/* Pay button */
+.pay-btn {
+    padding: 15px;
+    background: #ff4d6d;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.pay-btn:hover {
+    background: #e63d5b;
+}
+
+/* Confirmation placeholder */
+.confirmation {
+    background: rgba(255,255,255,0.35);
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .paynow-card {
+        padding: 20px;
+    }
+    .form-inline {
+        flex-direction: column;
+    }
+}

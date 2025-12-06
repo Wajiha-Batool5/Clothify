@@ -1,2 +1,0 @@
-# Clothify
-Clothing Brand Website

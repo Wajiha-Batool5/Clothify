@@ -1,0 +1,91 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    background: url("flower.jpg") no-repeat center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkout-container {
+    width: 420px;
+    background: rgba(255, 255, 255, 0.25);  /* low opacity */
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;  /* soft dark text */
+}
+
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label {
+    color: #555;  /* soft grey */
+    font-weight: 600;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+textarea {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+textarea {
+    resize: none;
+}
+
+.payment-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.payment-methods label {
+    font-weight: normal;
+    color: #555;
+}
+
+.pay-btn {
+    margin-top: 15px;
+    padding: 12px;
+    background: #ff4d6d;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.pay-btn:hover {
+    background: #e63d5b;
+}
+
+/* Responsive for small devices */
+@media (max-width: 500px) {
+    .checkout-container {
+        width: 90%;
+        padding: 20px;
+    }
+}

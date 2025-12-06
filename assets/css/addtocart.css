@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url("cart.jpg") no-repeat center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-container {
+    width: 420px;
+    background: rgba(255, 255, 255, 0.25);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+
+    display: flex;
+    flex-direction: column;   /* stack items vertically */
+    align-items: stretch;     /* full width items */
+    text-align: left;         
+    max-height: 80vh;         /* limit height */
+    overflow-y: auto;         /* scroll if many items */
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #555;       /* soft grey */
+    text-align: center;  /* heading stays centered */
+}
+
+.cart-item {
+    display: flex;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 12px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.cart-item img {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    margin-right: 12px;
+    object-fit: cover;
+}
+
+.item-details h4 {
+    margin: 0;
+    font-size: 17px;
+    color: #555;       /* soft grey */
+}
+
+.item-details p {
+    margin: 6px 0;
+    color: #555;       /* soft grey */
+}
+
+.qty-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+}
+
+.qty-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: #ff4d6d;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+
+    border-radius: 50%;       /* perfect circle */
+    cursor: pointer;
+
+    display: flex;            /* center symbol */
+    align-items: center;      /* vertical center */
+    justify-content: center;  /* horizontal center */
+    padding: 0;
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background: #ff4d6d;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 12px;
+    cursor: pointer;
+
+    align-self: center;  /* keep button centered */
+}
+
+.checkout-btn:hover {
+    background: #e63d5b;
+}
