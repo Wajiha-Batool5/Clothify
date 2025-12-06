@@ -4,6 +4,7 @@ html, body {
     padding: 0;
     height: 100%;
     font-family: Arial, sans-serif;
+    scroll-behavior: smooth;
 }
 
 /* TOP LOGO */
