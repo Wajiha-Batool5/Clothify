@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Pay Now - Clothify</title>
-    <link rel="stylesheet" href="paynow.css">
+    <link rel="stylesheet" href="../../assets/css/paynow.css">
 </head>
 <body>
 
@@ -58,8 +58,9 @@
         </div>
 
         <!-- Pay Now Button -->
+        <a href="../confirmation/confirmation.php">
         <button class="pay-btn" id="pay-btn">Pay Now</button>
-
+        </a>
         <!-- Confirmation Placeholder -->
         <div class="confirmation" id="confirmation" style="display:none;">
             <h3>Payment Confirmation</h3>

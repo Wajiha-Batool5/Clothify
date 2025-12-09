@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Checkout - Clothify</title>
-    <link rel="stylesheet" href="checkout.css">
+    <link rel="stylesheet" href="../../assets/css/checkout.css">
 </head>
 <body>
 

@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: url("cart.jpg") no-repeat center/cover;
+    background: url("/project/Clothify/assets/images/background/cart.jpg") no-repeat center/cover;
     height: 100vh;
     display: flex;
     justify-content: center;

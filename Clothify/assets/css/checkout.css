@@ -2,7 +2,7 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     height: 100vh;
-    background: url("flower.jpg") no-repeat center/cover;
+    background: url("/project/Clothify/assets/images/background/flower.jpg") no-repeat center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
