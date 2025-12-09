@@ -4,7 +4,7 @@ include __DIR__ . '/../../config/db.php';
 include __DIR__ . '/../../controllers/AuthController.php';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $name = $_POST['username'];
+    $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $confirm = $_POST['confirm_password'];

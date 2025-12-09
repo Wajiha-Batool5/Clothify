@@ -1,22 +1,8 @@
 <?php
-include __DIR__ . '/../models/Product.php';
 
-class ProductController {
-    private $productModel;
-    public function __construct($conn){
-        $this->productModel = new Product($conn);
-    }
-
-    public function getAllProducts(){
-        return $this->productModel->getAllProducts();
-    }
-
-    public function getProductsByCategory($category_id){
-        return $this->productModel->getProductsByCategory($category_id);
-    }
-
-    public function getProductById($id){
-        return $this->productModel->getProductById($id);
-    }
+function getProductsByCategory($conn, $categoryId) {
+    $stmt = $conn->prepare("SELECT * FROM products WHERE category_id = ?");
+    $stmt->bind_param("i", $categoryId);
+    $stmt->execute();
+    return $stmt->get_result();
 }
-?>

@@ -28,9 +28,15 @@
             <path d="M6 6h15l-1.5 9h-13z"/>
         </svg>
     </a>
+
+    <!-- Logout Icon -->
+    <a href="views/auth/logout.php" class="icon logout" title="Logout">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" viewBox="0 0 16 16">
+            <path d="M6 2a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9H4v2l-4-3 4-3v2h2V2z"/>
+        </svg>
+    </a>
+
 </div>
-
-
 
     <!-- HERO SECTION -->
 <section class="hero-section">
@@ -51,26 +57,32 @@
 
     <!-- CIRCULAR IMAGES SECTION -->
     <section class="circular-images">
+        <a href="views/products/casual_wear.php">
         <div class="circle-item">
             <div class="circle">
                 <img src="assets/images/banners/2.webp" alt="Casuals">
             </div>
             <div class="circle-text">Casuals</div>
         </div>
+        </a>
 
+        <a href="views/products/party_wear.php">
         <div class="circle-item">
             <div class="circle">
                 <img src="assets/images/banners/6.jpg" alt="Party Wear">
             </div>
             <div class="circle-text">Party Wear</div>
         </div>
+        </a>
 
+        <a href="views/products/wedding_wear.php">
         <div class="circle-item">
             <div class="circle">
                 <img src="assets/images/banners/5.jpg" alt="Wedding">
             </div>
             <div class="circle-text">Wedding</div>
         </div>
+        </a>
     </section>
 
     <!-- FEATURED COLLECTION SECTION -->

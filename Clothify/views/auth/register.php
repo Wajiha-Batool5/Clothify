@@ -13,9 +13,6 @@ if(isset($_POST['register'])){
     $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    // Debugging (optional) - remove after testing
-    // var_dump($username, $email, $password); exit;
-
     // Basic validation
     if(empty($username) || empty($email) || empty($password)){
         $error = "All fields are required!";

@@ -13,7 +13,8 @@ $products = $productController->getAllProducts();
 <head>
     <meta charset="UTF-8">
     <title>Clothify - Shop</title>
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="/WebPHPProject/Clothify/assets/css/products.css">
+
 </head>
 <body>
 <h1>Shop All Products</h1>

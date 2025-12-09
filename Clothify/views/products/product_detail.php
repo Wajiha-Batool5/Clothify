@@ -16,7 +16,8 @@ $product = $productController->getProductById($product_id);
 <head>
     <meta charset="UTF-8">
     <title><?php echo htmlspecialchars($product['name']); ?> - Clothify</title>
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="/WebPHPProject/Clothify/assets/css/products.css">
+
 </head>
 <body>
 <h1><?php echo htmlspecialchars($product['name']); ?></h1>

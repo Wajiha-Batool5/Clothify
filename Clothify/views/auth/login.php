@@ -36,7 +36,7 @@ if(isset($_POST['login'])){
 <head>
     <meta charset="UTF-8">
     <title>Clothify - Login</title>
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="/project/Clothify/assets/css/style.css">
 </head>
 <body>
 
