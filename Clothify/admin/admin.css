@@ -1,0 +1,242 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* BODY & CONTAINER */
+body {
+    background-color: #ffe6f0;
+    min-height: 100vh;
+    display: flex;
+}
+
+.container {
+    flex: 1;
+    padding: 20px;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 220px;
+    background-color: #ffb6c1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0;
+}
+
+.sidebar h2 {
+    color: white;
+    margin-bottom: 40px;
+}
+
+.sidebar a {
+    width: 90%;
+    text-decoration: none;
+    color: #900c3f;
+    font-weight: bold;
+    padding: 10px 15px;
+    margin: 5px 0;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #ff99b3;
+    color: white;
+}
+
+/* HEADER */
+header {
+    width: 100%;
+    background-color: #ffd6e8;
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #900c3f;
+}
+
+/* DASHBOARD CARDS */
+.dashboard-cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.card {
+    background-color: #fff0f6;
+    flex: 1 1 200px;
+    max-width: 200px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+}
+
+.card h2 {
+    margin-bottom: 10px;
+    color: #900c3f;
+}
+
+.card p {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+/* TABLES */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    background-color: #fff0f6;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    text-align: center;
+}
+
+table th {
+    background-color: #ff99b3;
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: #ffe6f0;
+}
+
+table tr:hover {
+    background-color: #ffccd9;
+}
+
+/* Product image in table */
+table img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #ffb6c1;
+}
+
+/* Status badges */
+.badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}
+
+.status-pending { background-color: #ff99b3; }
+.status-processing { background-color: #ff6699; }
+.status-completed { background-color: #900c3f; }
+.status-cancelled { background-color: #cc3366; }
+
+/* BUTTONS */
+button, input[type="submit"], a.btn {
+    padding: 8px 15px;
+    background-color: #ff99b3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+button:hover, input[type="submit"]:hover, a.btn:hover {
+    background-color: #ff6699;
+}
+
+/* FORMS */
+form {
+    background-color: #fff0f6;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+form input[type="text"], 
+form input[type="number"], 
+form input[type="file"], 
+form select, 
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px 0;
+    border: 1px solid #ffb6c1;
+    border-radius: 5px;
+    background-color: #fff0f6;
+}
+
+/* PAGE TITLES */
+.page-title {
+    font-size: 32px;
+    color: #900c3f;
+    margin: 30px 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    body { flex-direction: column; align-items: center; }
+    .sidebar { width: 100%; flex-direction: row; justify-content: center; flex-wrap: wrap; padding: 15px 0; }
+    .sidebar a { margin: 5px 10px; }
+    .dashboard-cards { flex-direction: column; }
+    form { max-width: 90%; }
+}
+
+/* Centered responsive form wrapper */
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}
+
+form {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Ensure file input label matches form styling */
+.custom-file-label {
+    font-size: 16px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+    .form-wrapper {
+        padding: 0 10px;
+    }
+
+    form input, form select, form textarea, .custom-file-label, input[type="submit"] {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
