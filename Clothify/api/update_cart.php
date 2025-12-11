@@ -1,20 +1,29 @@
 <?php
 session_start();
-include __DIR__ . '/../config/db.php';
-include __DIR__ . '/../controllers/CartController.php';
-
-header('Content-Type: application/json');
-
 if(!isset($_SESSION['user_id'])){
-    echo json_encode(['status'=>false]);
+    echo json_encode(['status'=>false,'message'=>'Not logged in']);
     exit;
 }
 
+include __DIR__ . '/../../config/db.php';
+include __DIR__ . '/../../controllers/CartController.php';
+
 $user_id = $_SESSION['user_id'];
-$product_id = intval($_POST['product_id'] ?? 0);
-$quantity = intval($_POST['quantity'] ?? 1);
+$product_id = $_POST['product_id'] ?? null;
+$quantity = $_POST['quantity'] ?? null;
+
+if(!$product_id || !$quantity){
+    echo json_encode(['status'=>false,'message'=>'Invalid data']);
+    exit;
+}
 
 $cartController = new CartController($conn);
-$cartController->updateQuantity($user_id, $product_id, $quantity);
+$updated = $cartController->updateCartItem($user_id, $product_id, $quantity);
 
-echo json_encode(['status'=>true]);
+if($updated){
+    echo json_encode(['status'=>true]);
+}else{
+    echo json_encode(['status'=>false,'message'=>'Failed to update cart']);
+}
+?>
+

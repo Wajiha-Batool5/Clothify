@@ -11,7 +11,7 @@
     <div class="paynow-card">
         <h2>Pay Now</h2>
 
-        <!-- Dynamic Order Summary -->
+        <!-- Order Summary -->
         <div class="order-summary">
             <h3>Order Summary</h3>
             <div id="order-items">
@@ -34,40 +34,31 @@
             <h3>Card Information</h3>
             <div class="form-group">
                 <label>Cardholder Name</label>
-                <input type="text" placeholder="John Doe">
+                <input type="text" id="card-name">
             </div>
             <div class="form-group">
                 <label>Card Number</label>
-                <input type="text" placeholder="1234 5678 9012 3456">
+                <input type="text" id="card-number">
             </div>
             <div class="form-inline">
                 <div class="form-group">
                     <label>Expiry</label>
-                    <input type="text" placeholder="MM/YY">
+                    <input type="text" id="expiry">
                 </div>
                 <div class="form-group">
                     <label>CVV</label>
-                    <input type="text" placeholder="123">
+                    <input type="text" id="cvv">
                 </div>
             </div>
         </div>
 
         <!-- PayPal Info -->
         <div class="paypal-info" style="display:none;">
-            <p>After clicking Pay Now, you will be redirected to PayPal to complete your payment securely.</p>
+            <p>You will be redirected to PayPal after clicking Pay Now.</p>
         </div>
 
-        <!-- Pay Now Button -->
-        <a href="../confirmation/confirmation.php">
+        <!-- Pay Button -->
         <button class="pay-btn" id="pay-btn">Pay Now</button>
-        </a>
-        <!-- Confirmation Placeholder -->
-        <div class="confirmation" id="confirmation" style="display:none;">
-            <h3>Payment Confirmation</h3>
-            <p>Order Number: <strong id="order-number">#12345</strong></p>
-            <p>Total Paid: <strong>Rs. <span id="paid-total">0</span></strong></p>
-            <p>Expected Delivery: <strong>3-5 business days</strong></p>
-        </div>
 
     </div>
 </div>

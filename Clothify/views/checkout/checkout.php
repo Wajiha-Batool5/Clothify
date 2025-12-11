@@ -10,7 +10,7 @@
 <div class="checkout-container">
     <h2>Checkout</h2>
 
-    <form class="checkout-form">
+    <form class="checkout-form" action="paynow.php" method="POST">
         <div class="form-group">
             <label for="fullname">Full Name</label>
             <input type="text" id="fullname" placeholder="John Doe" required>
@@ -39,7 +39,6 @@
                 <label><input type="radio" name="payment" value="paypal"> PayPal</label>
             </div>
         </div>
-
         <button type="submit" class="pay-btn">Pay Now</button>
     </form>
 </div>

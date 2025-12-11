@@ -28,7 +28,9 @@ if(!isset($_SESSION['user_id'])){
     function addToCart(name, price, img) {
         document.getElementById("cartItems").innerHTML = `
             <div class="cart-item">
-                <img src="${img}" alt="">
+                <img src="/project/Clothify/assets/images/products/<?= $product['image_path'] ?>" 
+     alt="<?= htmlspecialchars($product['name']) ?>">
+
                 <div class="item-details">
                     <h4>${name}</h4>
                     <p>Price: Rs. <span id="price">${price}</span></p>

@@ -1,56 +1,71 @@
 <?php
-include __DIR__ . '/../config/db.php';
-
 class Cart {
     private $conn;
+
     public function __construct($conn){
         $this->conn = $conn;
     }
 
+    // Add product to cart
     public function addToCart($user_id, $product_id, $quantity){
-        // Check if product already in cart
-        $stmt = $this->conn->prepare("SELECT * FROM cart WHERE user_id=? AND product_id=?");
+        // Check if product already exists in cart
+        $stmt = $this->conn->prepare("SELECT quantity FROM cart WHERE user_id=? AND product_id=?");
         $stmt->bind_param("ii", $user_id, $product_id);
         $stmt->execute();
         $result = $stmt->get_result();
+
         if($result->num_rows > 0){
-            // Update quantity
-            $stmt = $this->conn->prepare("UPDATE cart SET quantity=quantity+? WHERE user_id=? AND product_id=?");
-            $stmt->bind_param("iii", $quantity, $user_id, $product_id);
-            return $stmt->execute();
+            // Product exists → update quantity
+            $row = $result->fetch_assoc();
+            $newQty = $row['quantity'] + $quantity;
+            $update = $this->conn->prepare("UPDATE cart SET quantity=? WHERE user_id=? AND product_id=?");
+            $update->bind_param("iii", $newQty, $user_id, $product_id);
+            $update->execute();
+            $update->close();
         } else {
-            // Insert new item
-            $stmt = $this->conn->prepare("INSERT INTO cart (user_id, product_id, quantity) VALUES (?,?,?)");
-            $stmt->bind_param("iii", $user_id, $product_id, $quantity);
-            return $stmt->execute();
+            // Product not in cart → insert new
+            $insert = $this->conn->prepare("INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, ?)");
+            $insert->bind_param("iii", $user_id, $product_id, $quantity);
+            $insert->execute();
+            $insert->close();
         }
+
+        $stmt->close();
+        return true;
     }
 
+    // Get all cart items for a user
     public function getCartItems($user_id){
-        $stmt = $this->conn->prepare("SELECT cart.*, products.name, products.price, products.image 
-                                      FROM cart 
-                                      JOIN products ON cart.product_id = products.id 
-                                      WHERE cart.user_id=?");
+        $stmt = $this->conn->prepare("
+            SELECT c.product_id, c.quantity, p.name, p.price, p.image_path
+            FROM cart c
+            JOIN products p ON c.product_id = p.id
+            WHERE c.user_id = ?
+        ");
         $stmt->bind_param("i", $user_id);
         $stmt->execute();
         $result = $stmt->get_result();
-        $items = [];
-        while($row = $result->fetch_assoc()){
-            $items[] = $row;
-        }
+        $items = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
         return $items;
     }
 
+    // Remove a product from cart
     public function removeItem($user_id, $product_id){
         $stmt = $this->conn->prepare("DELETE FROM cart WHERE user_id=? AND product_id=?");
         $stmt->bind_param("ii", $user_id, $product_id);
-        return $stmt->execute();
+        $stmt->execute();
+        $stmt->close();
+        return true;
     }
 
+    // Clear entire cart
     public function clearCart($user_id){
         $stmt = $this->conn->prepare("DELETE FROM cart WHERE user_id=?");
         $stmt->bind_param("i", $user_id);
-        return $stmt->execute();
+        $stmt->execute();
+        $stmt->close();
+        return true;
     }
 }
 ?>
