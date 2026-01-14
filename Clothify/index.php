@@ -51,7 +51,7 @@
   <div class="hero-text">
       <h2>READY TO WEAR</h2>
       <h3>WINTER '25</h3>
-      <a href="#">SHOP NOW</a>
+      <a href="index.php">SHOP NOW</a>
   </div>
 </section>
 
@@ -91,7 +91,7 @@
             <p>10+ ITEMS</p>
             <h2>Casuals</h2>
             <p>Effortless style meets comfort with our casual dresses. Perfect for brunches, outings, or everyday wear, these pieces are versatile, chic, and easy to style for any occasion</p>
-            <a href="#">SHOP NOW</a>
+            <a href="views/products/casual_wear.php">SHOP NOW</a>
         </div>
 
         <div class="video">
@@ -114,7 +114,7 @@
             <p>10+ ITEMS</p>
             <h2>Party Wear</h2>
             <p>Turn heads at every celebration with our glamorous party wear collection. From bold colors to sparkling details, our outfits ensure you shine with confidence at every event</p>
-            <a href="#">SHOP NOW</a>
+            <a href="views/products/party_wear.php">SHOP NOW</a>
         </div>
     </section>
 
@@ -124,7 +124,7 @@
             <p>10+ ITEMS</p>
             <h2>Wedding</h2>
             <p>Make every wedding moment unforgettable with our stunning wedding dresses. Designed for elegance, comfort, and a perfect fit, our collection brings out your inner grace for your special days and dawats.</p>
-            <a href="#">SHOP NOW</a>
+            <a href="views/products/wedding_wear.php">SHOP NOW</a>
         </div>
 
         <div class="video">

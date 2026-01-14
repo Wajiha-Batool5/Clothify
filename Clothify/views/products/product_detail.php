@@ -26,28 +26,44 @@ $isLoggedIn = isset($_SESSION['user_id']); // assuming you store logged in user 
 <body>
 
 <div class="product-detail-container">
-    <h1><?= htmlspecialchars($product['name']); ?></h1>
 
-    <?php
-    $imagePath = '/project/Clothify/assets/images/products/' . $product['image_path'];
-    if (file_exists(__DIR__ . '/../../assets/images/products/' . $product['image_path'])): ?>
-        <img src="<?= htmlspecialchars($imagePath) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
-    <?php else: ?>
-        <img src="/project/Clothify/assets/images/products/default.png" alt="No image available">
-    <?php endif; ?>
-    
-    <p class="price">Price: Rs. <?= htmlspecialchars($product['price']); ?></p>
-    <p class="description"><?= nl2br(htmlspecialchars($product['description'])); ?></p>
+    <!-- LEFT SIDE : PRODUCT IMAGE -->
+    <div class="product-image">
+        <?php
+        $imagePath = '/project/Clothify/assets/images/products/' . $product['image_path'];
+        if (file_exists(__DIR__ . '/../../assets/images/products/' . $product['image_path'])): ?>
+            <img src="<?= htmlspecialchars($imagePath) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
+        <?php else: ?>
+            <img src="/project/Clothify/assets/images/products/default.png" alt="No image available">
+        <?php endif; ?>
+    </div>
 
-    <label>Quantity:</label>
-    <input type="number" id="quantity" value="1" min="1">
+    <!-- RIGHT SIDE : PRODUCT INFO -->
+    <div class="product-info">
+        <h1><?= htmlspecialchars($product['name']); ?></h1>
 
-    <?php if($isLoggedIn): ?>
-        <button id="addToCartBtn">Add to Cart</button>
-        <p id="statusMsg" style="color:green;"></p>
-    <?php else: ?>
-        <p style="color:red; font-weight:bold;">Please <a href="/project/Clothify/views/auth/login.php">login</a> to add this product to your cart.</p>
-    <?php endif; ?>
+        <p class="price">Rs. <?= htmlspecialchars($product['price']); ?></p>
+
+        <p class="description">
+            <?= nl2br(htmlspecialchars($product['description'])); ?>
+        </p>
+
+        <!-- PURCHASE AREA -->
+        <div class="purchase-box">
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" value="1" min="1">
+
+            <?php if($isLoggedIn): ?>
+                <button id="addToCartBtn">Add to Cart</button>
+                <p id="statusMsg"></p>
+            <?php else: ?>
+                <p class="login-warning">
+                    Please <a href="/project/Clothify/views/auth/login.php">login</a> to add this product to your cart.
+                </p>
+            <?php endif; ?>
+        </div>
+    </div>
+
 </div>
 
 <?php if($isLoggedIn): ?>
@@ -64,11 +80,10 @@ document.getElementById('addToCartBtn').addEventListener('click', function() {
     })
     .then(response => response.json())
     .then(data => {
-        const statusMsg = document.getElementById('statusMsg');
         if(data.status){
-            statusMsg.innerText = "Added to cart successfully!";
+            window.location.href = "/project/Clothify/views/cart/view_cart.php";
         } else {
-            statusMsg.innerText = data.message;
+            document.getElementById('statusMsg').innerText = data.message;
         }
     })
     .catch(err => {

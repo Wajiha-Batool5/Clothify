@@ -60,11 +60,29 @@ if(isset($_POST['submit'])) {
     }
 }
 ?>
+<!DOCTYPE html>
+<html>
 <head>
+    <title>Add Products</title>
     <link rel="stylesheet" href="admin.css">
+    <style>
+        /* Modal styling */
+        .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; }
+        .modal-content { background:#fff0f6; padding:20px; border-radius:10px; width:400px; max-width:90%; position:relative; }
+        .close { position:absolute; top:10px; right:15px; cursor:pointer; font-size:22px; font-weight:bold; color:#900c3f; }
+    </style>
 </head>
-    <h2>Add Product</h2>
-<p style="color:green;"><?= $message ?></p>
+<body>
+<div class="sidebar">
+    <h2>Clothify Admin</h2>
+    <a href="index.php">Dashboard</a>
+    <a href="add_product.php">Add Product</a>
+    <a href="edit_product.php">Edit Products</a>
+    <a href="view_orders.php">Orders</a>
+    <a href="manage_users.php">Users</a>
+</div>
+<div class="container">
+    <header>Add Products</header>
 
 <form method="post" enctype="multipart/form-data">
     <label>Name:</label><br>
@@ -91,3 +109,4 @@ if(isset($_POST['submit'])) {
 
     <input type="submit" name="submit" value="Add Product">
 </form>
+</div>

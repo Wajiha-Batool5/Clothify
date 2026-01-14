@@ -1,4 +1,14 @@
-<?php include "../config/db.php"; ?>
+<?php
+include __DIR__ . '/../config/db.php';
+
+// Fetch all orders with user info
+$orders = $conn->query("
+    SELECT o.*, u.username 
+    FROM orders o
+    JOIN users u ON o.user_id = u.id
+    ORDER BY o.created_at DESC
+");
+?>
 
 <!DOCTYPE html>
 <html>
@@ -23,23 +33,21 @@
             <tr>
                 <th>Order ID</th>
                 <th>User</th>
-                <th>Total</th>
+                <th>Total Amount</th>
                 <th>Status</th>
-                <th>Date</th>
+                <th>Created At</th>
+                <th>Items</th>
             </tr>
-        <?php
-        $orders = $conn->query("SELECT o.*, u.username FROM orders o JOIN users u ON o.user_id=u.id");
-        while($o = $orders->fetch_assoc()) {
-            $statusClass = "status-{$o['status']}";
-            echo "<tr>
-                    <td>{$o['id']}</td>
-                    <td>{$o['username']}</td>
-                    <td>{$o['total_amount']}</td>
-                    <td><span class='badge {$statusClass}'>" . ucfirst($o['status']) . "</span></td>
-                    <td>{$o['created_at']}</td>
-                  </tr>";
-        }
-        ?>
+        <?php while($row = $orders->fetch_assoc()): ?>
+    <tr>
+        <td><?= $row['id'] ?></td>
+        <td><?= htmlspecialchars($row['username']) ?></td>
+        <td>Rs. <?= $row['total_amount'] ?></td>
+        <td><?= ucfirst($row['status']) ?></td>
+        <td><?= $row['created_at'] ?></td>
+        <td><a href="view_order_items.php?order_id=<?= $row['id'] ?>">View Items</a></td>
+    </tr>
+    <?php endwhile; ?>
         </table>
     </div>
 </body>

@@ -1,29 +1,42 @@
 <?php
 session_start();
+include __DIR__ . '/../config/db.php';
+
+header('Content-Type: application/json');
+
 if(!isset($_SESSION['user_id'])){
-    echo json_encode(['status'=>false,'message'=>'Not logged in']);
+    echo json_encode(['status'=>false, 'message'=>'Please login']);
     exit;
 }
-
-include __DIR__ . '/../../config/db.php';
-include __DIR__ . '/../../controllers/CartController.php';
 
 $user_id = $_SESSION['user_id'];
-$product_id = $_POST['product_id'] ?? null;
-$quantity = $_POST['quantity'] ?? null;
+$cart_id = $_POST['cart_id'] ?? null;
+$change = $_POST['change'] ?? null;
 
-if(!$product_id || !$quantity){
-    echo json_encode(['status'=>false,'message'=>'Invalid data']);
+if(!$cart_id || !$change){
+    echo json_encode(['status'=>false, 'message'=>'Invalid data']);
     exit;
 }
 
-$cartController = new CartController($conn);
-$updated = $cartController->updateCartItem($user_id, $product_id, $quantity);
+// Get current quantity
+$query = $conn->prepare("SELECT quantity FROM carts WHERE id=? AND user_id=?");
+$query->bind_param("ii", $cart_id, $user_id);
+$query->execute();
+$result = $query->get_result();
 
-if($updated){
-    echo json_encode(['status'=>true]);
-}else{
-    echo json_encode(['status'=>false,'message'=>'Failed to update cart']);
+if($result->num_rows === 0){
+    echo json_encode(['status'=>false, 'message'=>'Cart item not found']);
+    exit;
 }
-?>
 
+$row = $result->fetch_assoc();
+$newQty = $row['quantity'] + $change;
+if($newQty < 1) $newQty = 1;
+
+// Update quantity
+$update = $conn->prepare("UPDATE carts SET quantity=?, updated_at=NOW() WHERE id=? AND user_id=?");
+$update->bind_param("iii", $newQty, $cart_id, $user_id);
+$update->execute();
+
+echo json_encode(['status'=>true, 'newQty'=>$newQty]);
+?>

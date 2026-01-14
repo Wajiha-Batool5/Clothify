@@ -1,40 +1,44 @@
 <?php
 session_start();
+include __DIR__ . '/../config/db.php';
 
-// Make sure the product data is sent via POST
-if(isset($_POST['product_id'], $_POST['name'], $_POST['price'], $_POST['image'], $_POST['qty'])) {
-    $product_id = $_POST['product_id'];
-    $name = $_POST['name'];
-    $price = $_POST['price'];
-    $image = $_POST['image'];
-    $qty = $_POST['qty'];
+header('Content-Type: application/json');
 
-    // Initialize cart if not already
-    if(!isset($_SESSION['cart'])) {
-        $_SESSION['cart'] = [];
-    }
-
-    // Check if product already in cart
-    $found = false;
-    foreach($_SESSION['cart'] as &$item) {
-        if($item['product_id'] == $product_id) {
-            $item['qty'] += $qty; // Increase quantity
-            $found = true;
-            break;
-        }
-    }
-
-    if(!$found) {
-        $_SESSION['cart'][] = [
-            'product_id' => $product_id,
-            'name' => $name,
-            'price' => $price,
-            'image' => $image,
-            'qty' => $qty
-        ];
-    }
-
-    echo json_encode(['status' => 'success', 'message' => 'Product added to cart']);
-} else {
-    echo json_encode(['status' => 'error', 'message' => 'Invalid product data']);
+// Check if user is logged in
+if(!isset($_SESSION['user_id'])){
+    echo json_encode(['status'=>false, 'message'=>'Please login']);
+    exit;
 }
+
+$user_id = $_SESSION['user_id'];
+$product_id = $_POST['product_id'] ?? null;
+$quantity = $_POST['quantity'] ?? 1;
+
+if(!$product_id){
+    echo json_encode(['status'=>false, 'message'=>'No product specified']);
+    exit;
+}
+
+// Check if product already in cart
+$check = $conn->prepare("SELECT id, quantity FROM carts WHERE user_id=? AND product_id=?");
+$check->bind_param("ii", $user_id, $product_id);
+$check->execute();
+$res = $check->get_result();
+
+if($res->num_rows > 0){
+    // Update quantity
+    $row = $res->fetch_assoc();
+    $newQty = $row['quantity'] + $quantity;
+
+    $update = $conn->prepare("UPDATE carts SET quantity=?, updated_at=NOW() WHERE id=?");
+    $update->bind_param("ii", $newQty, $row['id']);
+    $update->execute();
+}else{
+    // Insert new
+    $insert = $conn->prepare("INSERT INTO carts (user_id, product_id, quantity, created_at) VALUES (?, ?, ?, NOW())");
+    $insert->bind_param("iii", $user_id, $product_id, $quantity);
+    $insert->execute();
+}
+
+echo json_encode(['status'=>true, 'message'=>'Product added to cart']);
+?>

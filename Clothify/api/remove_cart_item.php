@@ -1,16 +1,26 @@
 <?php
 session_start();
+include __DIR__ . '/../config/db.php';
 
-if(isset($_POST['product_id']) && isset($_SESSION['cart'])) {
-    $product_id = $_POST['product_id'];
-    foreach($_SESSION['cart'] as $key => $item) {
-        if($item['product_id'] == $product_id) {
-            unset($_SESSION['cart'][$key]);
-            $_SESSION['cart'] = array_values($_SESSION['cart']); // Reindex array
-            break;
-        }
-    }
+header('Content-Type: application/json');
+
+if(!isset($_SESSION['user_id'])){
+    echo json_encode(['status'=>false, 'message'=>'Please login']);
+    exit;
 }
 
-header('Location: view_cart.php');
-exit;
+$user_id = $_SESSION['user_id'];
+$cart_id = $_POST['cart_id'] ?? null;
+
+if(!$cart_id){
+    echo json_encode(['status'=>false, 'message'=>'Invalid cart item']);
+    exit;
+}
+
+// Delete item
+$delete = $conn->prepare("DELETE FROM carts WHERE id=? AND user_id=?");
+$delete->bind_param("ii", $cart_id, $user_id);
+$delete->execute();
+
+echo json_encode(['status'=>true, 'message'=>'Item removed']);
+?>
