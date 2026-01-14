@@ -140,6 +140,5 @@ Product search and filtering
 Password hashing improvements
 Responsive mobile design
 Email notifications for users
-Author
-Wajiha Batool Web Development Project
+
 
